@@ -23,6 +23,7 @@
     [self setBtnReload:nil];
     [self setWebIndicator:nil];
     [self setTblView:nil];
+    [self setTopImage:nil];
     [super viewDidUnload];
 }
 - (void)viewDidLoad
@@ -31,6 +32,8 @@
 	// Do any additional setup after loading the view, typically from a nib.
     ef_AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
    appDelegate.viewController = self;
+    
+    [self.view sendSubviewToBack:self.topImage];
     
 }
 
@@ -47,18 +50,6 @@
     [appDelegate determineNotif];
 }
 
-- (IBAction)btnHelpDo:(id)sender {
-    
-        UIAlertView *alertView
-        = [[UIAlertView alloc] initWithTitle:@"条件について"
-                                     message:@"ヘルプ情報です¥nです。"
-                                    delegate:nil
-                           cancelButtonTitle:@"OK"
-                           otherButtonTitles:nil];
-        [alertView show];
-//        [alertView release];
-        
-}
 
 
 ///////////ここからメイン
@@ -187,7 +178,7 @@
     return @"1時間足／２４時間平均";
 }
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
-    return @"ここまで";
+    return @"BB２σライン超えると自動で通知";
 }
 // 最初の１回しかよばれなさそう
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -245,41 +236,42 @@
         switch (val){
             case 1:
                 cell.textLabel.textColor = [UIColor yellowColor];
-                cell.imageView.image = nil;
+                cell.imageView.image =[UIImage imageNamed:@"up1.png"];
                 //                cell.detailTextLabel.text = @" ↑";
                 break;
             case 2:
                 cell.textLabel.textColor = [UIColor redColor];
                 //                cell.detailTextLabel.text = @" ↑↑";
-                cell.imageView.image =[UIImage imageNamed:@"warning.png"];
+                cell.imageView.image =[UIImage imageNamed:@"up2.png"];
                 break;
             case 3:
                 cell.textLabel.textColor = [UIColor magentaColor];
                 //                cell.detailTextLabel.text = @" ↑↑↑";
-                cell.imageView.image =[UIImage imageNamed:@"warning.png"];
+                cell.imageView.image =[UIImage imageNamed:@"up3.png"];
                 break;
             case -1:
                 cell.textLabel.textColor = [UIColor yellowColor];
                 cell.imageView.image = nil;
-                                
+                cell.imageView.image =[UIImage imageNamed:@"down1.png"];
+                
                 break;
             case -2:
                 cell.textLabel.textColor = [UIColor redColor];
                 //                cell.textLabel.text = [[gotList objectAtIndex: indexPath.row] stringByAppendingString:@" ↓"];
                 //                cell.detailTextLabel.text = @" ↓↓";
-                cell.imageView.image =[UIImage imageNamed:@"warning.png"];
+                cell.imageView.image =[UIImage imageNamed:@"down2.png"];
                 break;
             case -3:
                 cell.textLabel.textColor = [UIColor magentaColor];
                 //                cell.textLabel.text = [[gotList objectAtIndex: indexPath.row] stringByAppendingString:@" ↓"];
                 //                cell.detailTextLabel.text = @" ↓↓↓";
-                cell.imageView.image =[UIImage imageNamed:@"warning.png"];
+                cell.imageView.image =[UIImage imageNamed:@"down3.png"];
                 break;
             default:
                 //                cell.textLabel.text = [[gotList objectAtIndex: indexPath.row] stringByAppendingString:@" "];
                 //                cell.detailTextLabel.text = cur_name;
                 cell.textLabel.textColor = [UIColor blackColor];
-                cell.imageView.image = nil;
+                cell.imageView.image =[UIImage imageNamed:@"none.png"];
 //                cell.detailTextLabel.text = @"000000000";
 
                 

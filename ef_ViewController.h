@@ -13,6 +13,7 @@
 @property (weak, nonatomic) IBOutlet UITextView *txt4Debug;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *btnReload;
 - (IBAction)btnReloaddo:(id)sender;
+@property (weak, nonatomic) IBOutlet UIImageView *topImage;
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *webIndicator;
 @property (weak, nonatomic) IBOutlet UITableView *tblView;

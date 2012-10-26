@@ -195,6 +195,8 @@
     }
 //    [msg release];
 }
+
+// Local Notificationの設定
 - (void)setNotif:(int)warnCount{
     NSLog(@"Set Notification");
     // ローカル通知を作成する

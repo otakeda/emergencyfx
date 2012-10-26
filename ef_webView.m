@@ -47,7 +47,7 @@
 
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     [self performSelectorInBackground:@selector(indicatorStart) withObject:nil];
-    [NSThread sleepForTimeInterval:3.0];
+//    [NSThread sleepForTimeInterval:3.0];
 }
 
 // ページ読込完了時にインジケータを非表示にする
@@ -61,8 +61,6 @@
 - (void) indicatorStart{
     [self.view bringSubviewToFront:self.indicator1];
     [self.indicator1 startAnimating];
-    
-
 }
 - (void) indicatorStop{
     [self.indicator1 stopAnimating];
