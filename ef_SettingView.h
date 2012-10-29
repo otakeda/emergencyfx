@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ef_SettingView : UIViewController
+@interface ef_SettingView : UIViewController <UIPickerViewDelegate>
 - (IBAction)btnClose:(id)sender;
+@property (weak, nonatomic) IBOutlet UIPickerView *pikerFrom;
+@property (weak, nonatomic) IBOutlet UITextView *txtMsg;
+
 
 @end

@@ -36,7 +36,7 @@
                              stringByReplacingOccurrencesOfString: @" " withString: @""];
     NSLog(@"deviceToken: %@", deviceToken);
 }
-// プッシュ通知を受信した際の処理
+// プッシュ通知を受信した際の処理　　アプリ起動中しかここにきてないのか？　BGだとデバッグできないのか？
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
 #if !TARGET_IPHONE_SIMULATOR
     NSLog(@"remote notification: %@",[userInfo description]);
@@ -143,6 +143,8 @@
 
 }
 
+
+//30秒ごとに自動的に画面を更新
 - (void)createFrontJob{
     //フォアグラウンド用のタスクを動かす。dispatch_asyncなので結果を待たずにすぐ次へ
     dispatch_queue_t gcd_queue =
@@ -191,9 +193,7 @@
                               cancelButtonTitle:@"OK"
                               otherButtonTitles:nil];
         [alert show];
-//        [alert release];
     }
-//    [msg release];
 }
 
 // Local Notificationの設定
@@ -222,7 +222,6 @@
     // ローカル通知を登録する
     [[UIApplication sharedApplication] scheduleLocalNotification:notification];
     
-//    [notification release];
     
 }
 - (void) getUUID

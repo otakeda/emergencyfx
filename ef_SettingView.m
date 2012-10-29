@@ -27,6 +27,12 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    // Pickerのデフォルト値
+    [self.pikerFrom selectRow:9 inComponent:0 animated:YES];
+    [self.pikerFrom selectRow:8 inComponent:1 animated:YES];
+    
+    //メッセージを一番上にもってくる
+    [self.view bringSubviewToFront:self.txtMsg];
 }
 
 - (void)didReceiveMemoryWarning
@@ -36,6 +42,33 @@
 }
 
 - (IBAction)btnClose:(id)sender {
- [self dismissViewControllerAnimated:YES completion:nil];
+    // 画面close
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
+- (void)viewDidUnload {
+    
+    [self setPikerFrom:nil];
+    [self setTxtMsg:nil];
+    [super viewDidUnload];
+}
+
+// ピッカービューのコンポーネント(列)の数を返す
+- (NSInteger) numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 2;
+}
+// ピッカービューの行の数を返す
+- (NSInteger) pickerView: (UIPickerView*)pView numberOfRowsInComponent:(NSInteger) component {
+    
+    return 12;
+}
+// ピッカービューの行のタイトルを返す
+- (NSString*)pickerView: (UIPickerView*) pView titleForRow:(NSInteger) row forComponent:(NSInteger)component {
+    
+    switch (component) {
+        case 0: return [NSString stringWithFormat:@" %0d:00", row];
+        case 1: return [NSString stringWithFormat:@" %0d:00", row+12];
+    }
+    return @"";
+}
+
 @end

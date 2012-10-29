@@ -13,7 +13,6 @@
 
 - (IBAction)btnClose:(id)sender;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicator1;
-//- (void) indicatorStart;
-//- (void) indicatorEnd;
+
 @end
 

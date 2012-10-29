@@ -42,8 +42,6 @@
 }
 //画面の上の小さいindicator
 -(void)webViewDidStartLoad:(UIWebView*)webView{
-//    webView.hidden=YES;
-//    [self.view sendSubviewToBack:webView];
 
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     [self performSelectorInBackground:@selector(indicatorStart) withObject:nil];
@@ -54,8 +52,6 @@
 -(void)webViewDidFinishLoad:(UIWebView*)webView{
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     [self performSelectorInBackground:@selector(indicatorStop) withObject:nil];
-    //[self.view bringSubviewToFront:webView];
-    //webView.hidden=NO;
 }
 
 - (void) indicatorStart{
