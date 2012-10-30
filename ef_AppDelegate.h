@@ -14,9 +14,10 @@
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) ef_ViewController *viewController;
 - (void)determineNotif;
+- (NSString *)getDeviceToken;
 @end
 
 NSInteger lastCount;
-
+NSString *deviceToken;
 UIBackgroundTaskIdentifier bgTask;
 

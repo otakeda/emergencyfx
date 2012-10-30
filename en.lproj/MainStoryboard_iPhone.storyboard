@@ -39,7 +39,7 @@
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h9E-MF-d4N">
                                 <color key="backgroundColor" red="0.55927309782608692" green="0.55927309782608692" blue="0.55927309782608692" alpha="0.47999999999999998" colorSpace="calibratedRGB"/>
                                 <items>
-                                    <navigationItem title="emergency" id="JxL-EF-DVD">
+                                    <navigationItem title="FXアラーム" id="JxL-EF-DVD">
                                         <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="jOT-Ub-tEg">
                                             <connections>
                                                 <action selector="btnReloaddo:" destination="2" id="TZ5-nB-n4i"/>
@@ -285,39 +285,6 @@
         <image name="36-toolbox.png" width="26" height="20"/>
         <image name="worldmap.jpeg" width="480" height="120"/>
     </resources>
-    <classes>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="ef_SettingView" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ef_SettingView.h"/>
-            <relationships>
-                <relationship kind="action" name="btnClose:"/>
-                <relationship kind="outlet" name="pikerFrom" candidateClass="UIPickerView"/>
-                <relationship kind="outlet" name="txtMsg" candidateClass="UITextView"/>
-            </relationships>
-        </class>
-        <class className="ef_ViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ef_ViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="btnReloaddo:"/>
-                <relationship kind="outlet" name="btnReload" candidateClass="UIBarButtonItem"/>
-                <relationship kind="outlet" name="lblStatus" candidateClass="UILabel"/>
-                <relationship kind="outlet" name="tblView" candidateClass="UITableView"/>
-                <relationship kind="outlet" name="topImage" candidateClass="UIImageView"/>
-                <relationship kind="outlet" name="txt4Debug" candidateClass="UITextView"/>
-                <relationship kind="outlet" name="webIndicator" candidateClass="UIActivityIndicatorView"/>
-            </relationships>
-        </class>
-        <class className="ef_webView" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/ef_webView.h"/>
-            <relationships>
-                <relationship kind="action" name="btnClose:"/>
-                <relationship kind="outlet" name="indicator1" candidateClass="UIActivityIndicatorView"/>
-                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

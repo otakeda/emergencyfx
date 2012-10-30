@@ -28,15 +28,19 @@
     // Override point for customization after application launch.
     return YES;
 }
+- (NSString *)getDeviceToken{
+    return deviceToken;
+}
 // デバイストークンを受信した際の処理
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)devToken {
     
-    NSString *deviceToken = [[[[devToken description] stringByReplacingOccurrencesOfString:@"<"withString:@""]
+//    NSString *
+    deviceToken = [[[[devToken description] stringByReplacingOccurrencesOfString:@"<"withString:@""]
                               stringByReplacingOccurrencesOfString:@">" withString:@""]
                              stringByReplacingOccurrencesOfString: @" " withString: @""];
     NSLog(@"deviceToken: %@", deviceToken);
 }
-// プッシュ通知を受信した際の処理　　アプリ起動中しかここにきてないのか？　BGだとデバッグできないのか？
+// プッシュ通知を受信した際の処理　　front時しかここにきてなさそう　BGだとデバッグできないのか？
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
 #if !TARGET_IPHONE_SIMULATOR
     NSLog(@"remote notification: %@",[userInfo description]);
@@ -52,8 +56,19 @@
     NSString *badge = [apsInfo objectForKey:@"badge"];
     NSLog(@"Received Push Badge: %@", badge);
     application.applicationIconBadgeNumber = [[apsInfo objectForKey:@"badge"] integerValue];
+
+    NSString *msg = [[NSString alloc]initWithFormat:@"2σ Line Over : %@", badge];
+    UIAlertView *alertWin = [[UIAlertView alloc]
+                              initWithTitle:@"Remote Infomation"
+                              message:msg
+                              delegate:self
+                              cancelButtonTitle:@"OK"
+                              otherButtonTitles:nil];
+    [alertWin show];
 #endif
+
 }
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
@@ -102,10 +117,10 @@
                 
                 [NSThread sleepForTimeInterval:60.0];
                 
-                if (bgTask==UIBackgroundTaskInvalid) break;
+                if (bgTask==UIBackgroundTaskInvalid) break;  //frontになってこのタスクがinvalidになってたらループ抜ける
             }
             
-            [application endBackgroundTask:bgTask];
+            [application endBackgroundTask:bgTask];  // 念のため後処理もう一回
             bgTask = UIBackgroundTaskInvalid;
         });
     }
@@ -155,11 +170,12 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self.viewController updateData];  // dispatch_asyncをはずすと動かない。たぶんviewControllerがちゃんとしてないうちにこれが呼ばれるから？
             });
-            [self determineNotif];  // updateDataが非同期で動いているのでこっちが先に終わってしまう
+            // remote notification始めたのでこれはコメントアウト中
+//          [self determineNotif];  // updateDataが非同期で動いているのでこっちが先に終わってしまう
             
             [NSThread sleepForTimeInterval:30.0];
-            if (bgTask != UIBackgroundTaskInvalid) break;
             
+            if (bgTask != UIBackgroundTaskInvalid) break;  // BGタスクが動いていたら抜ける
         }
     });
     
@@ -182,12 +198,13 @@
 #pragma mark - UILocalNotification
 /* ============================================================================== */
 // 通常、アプリケーションが起動中の場合はローカル通知は通知されないが、通知されるようにする
+
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
 {
     NSString *msg = [[NSString alloc]initWithFormat:@"2σ Line Over : %d", lastCount];
     if(notification) {
         UIAlertView *alert = [[UIAlertView alloc]
-                              initWithTitle:@"Infomation"
+                              initWithTitle:@"Local Infomation"
                               message:msg
                               delegate:self
                               cancelButtonTitle:@"OK"

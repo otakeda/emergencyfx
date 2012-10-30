@@ -89,9 +89,21 @@
     //リロード連打防止で１秒スリープ
     [NSThread sleepForTimeInterval:1.0];
     
+    ef_AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+//    NSString *dt = [[NSString alloc] initWithString:[appDelegate getDeviceToken]];
+    NSString *urlstr;
+    if ([appDelegate getDeviceToken]){
+        urlstr = [@"http://leanprojectman.com/php/n3/fxjson.php?dt=" stringByAppendingString: [appDelegate getDeviceToken]];
+    }
+    else{
+        urlstr = @"http://leanprojectman.com/php/n3/fxjson.php";
+    }
+    
+    
     self.txt4Debug.text=nil;
     // 送信したいURLを作成し、Requestを作成します。
-    NSURL *url = [NSURL URLWithString:@"http://leanprojectman.com/php/n3/fxjson.php"];
+//    NSURL *url = [NSURL URLWithString:@"http://leanprojectman.com/php/n3/fxjson.php"];
+    NSURL *url = [NSURL URLWithString:urlstr];
     NSURLRequest  *request = [[NSURLRequest alloc] initWithURL:url];
     
     // NSURLConnectionのインスタンスを作成したら、すぐに
