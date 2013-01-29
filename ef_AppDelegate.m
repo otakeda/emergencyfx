@@ -22,9 +22,7 @@
     lastCount = 0;
     
     //APNS PUsh通知が使えるように登録
-    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge
-                                                                           | UIRemoteNotificationTypeSound
-                                                                           | UIRemoteNotificationTypeAlert)];
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge| UIRemoteNotificationTypeSound| UIRemoteNotificationTypeAlert)];
     // Override point for customization after application launch.
     return YES;
 }
